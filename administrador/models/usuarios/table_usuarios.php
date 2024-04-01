@@ -10,9 +10,9 @@ $consulta = $query->fetchAll(PDO::FETCH_ASSOC);
 
 for($i = 0;$i < count($consulta);$i++) {
     if ($consulta[$i]['estado'] == 1) {
-        $consulta[$i]['estado'] = '<span class="badge badge-success">Activo</span>';
+        $consulta[$i]['estado'] = '<span class="badge-success">Activo</span>';
     } else {
-        $consulta[$i]['estado'] = '<span class="badge badge-danger">Inactivo</span>';
+        $consulta[$i]['estado'] = '<span class="badge-danger">Inactivo</span>';
     }
 
     $consulta[$i]['acciones'] = '
