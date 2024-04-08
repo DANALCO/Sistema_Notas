@@ -18,7 +18,7 @@ if(!empty($_POST)) {
                 if($result['estado'] == 1) {
                     $_SESSION['active'] = true;
                     $_SESSION['id_usuario'] = $result['usuario_id'];
-                    $_SESSION['nombre'] = $result['usuario'];
+                    $_SESSION['nombre'] = $result['nombre'];
                     $_SESSION['rol'] = $result['rol_id'];
                     $_SESSION['nombre_rol'] = $result['nombre_rol'];
 

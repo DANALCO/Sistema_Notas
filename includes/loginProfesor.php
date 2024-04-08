@@ -8,22 +8,22 @@ if(!empty($_POST)) {
         $login = $_POST['loginProfesor'];
         $pass = $_POST['passProfesor'];
 
-        $sql = 'SELECT * FROM PROFESOR WHERE cedula = ?';
+        $sql = 'SELECT * FROM profesor WHERE cedula = ?';
         $query = $pdo->prepare($sql);
         $query->execute(array($login));
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if($query->rowCount() > 0) {
             if(password_verify($pass, $result['clave'])) {
-            $_SESSION['activeP'] = true;
-            $_SESSION['profesor_id'] = - $result['profesor_id'];
-            $_SESSION['nombre'] = $result['nombre'];
-            $_SESSION['cedula'] = $result['cedula'];
-            echo '<div class-Talert alert-success"> <button type="button" class="close" data-dismiss="alert"></button>Redirecting</div>';
-        }else {
-            echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button>Usuario o Clave
-            incorrectos</div>';
-        }
+                $_SESSION['activeP'] = true;
+                $_SESSION['profesor_id'] = - $result['profesor_id'];
+                $_SESSION['nombre'] = $result['nombre'];
+                $_SESSION['cedula'] = $result['cedula'];
+                
+                echo '<div class-Talert alert-success"> <button type="button" class="close" data-dismiss="alert"></button>Redirecting</div>';
+            }else {
+                echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button>Usuario o Clave incorrectos</div>';
+            }
         } else {
             echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button>Usuario o Clave
             incorrectos</div>';

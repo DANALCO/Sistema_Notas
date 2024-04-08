@@ -53,7 +53,7 @@
                         <label for="password">Contraseña</label>
                         <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
                         <div id="messageProfesor"></div>
-                        <button id="loginP" type="button">INICIAR SESION</button>
+                        <button id="loginProfesor" type="button">INICIAR SESION</button>
                     </form>
                 </div>
             </div>
