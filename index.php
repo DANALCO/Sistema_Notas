@@ -21,8 +21,8 @@
     <header class="main-header">
         <div class="main-cont">
             <div class="desc-header">
-                <img src="images/school.svg" alt="image school">
-                <p>School</p>
+                <img src="images/fondo.png" alt="imagen secundaria aftons">
+                <h1>Secundaria Aftons</h1>
             </div>
         </div>
         <div class="cont-header">
@@ -53,14 +53,13 @@
                         <label for="password">Contraseña</label>
                         <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
                         <div id="messageProfesor"></div>
-                        <button id="loginP" type="button">INICIAR SESION</button>
+                        <button id="loginProfesor" type="button">INICIAR SESION</button>
                     </form>
                 </div>
             </div>
         </div>
-
     </header>
-    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/login.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
