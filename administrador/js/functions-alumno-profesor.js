@@ -1,60 +1,59 @@
-$('#tableprofesormateria').DataTable();
-var tableprofesormateria;
+$('#tablealumnoprofesor').DataTable();
+var tablealumnoprofesor;
 
 document.addEventListener('DOMContentLoaded',function(){
-    tableprofesormateria = $('#tableprofesormateria').DataTable({
+    tablealumnoprofesor = $('#tablealumnoprofesor').DataTable({
     "aProcessing": true,
     "aServerSide": true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
     },
     "ajax": {
-        "url": "./models/profesor-materia/table_profesor_materia.php",
+        "url": "./models/alumno-profesor/table_alumno_profesor.php",
         "dataSrc": ""
     },
     "columns": [
         { "data": "acciones" },
         { "data": "pm_id" },
+        { "data": "nombre_alumno" },
         { "data": "nombre" },
         { "data": "nombre_grado" },
-        { "data": "nombre_aula" },
         { "data": "nombre_materia" },
         { "data": "nombre_periodo" },
-        { "data": "estadopm" }
+        { "data": "estadoap" }
     ],
     "responsive": true,
     "bDestroy": true,
     "iDisplayLength": 10,
     "order": [[0, "asc"]]
     });
-    var formProfesorMateria = document.querySelector('#formProfesorMateria');
-    formProfesorMateria.onsubmit = function(e) {
+    var formAlumnoProfesor = document.querySelector('#formAlumnoProfesor');
+    formAlumnoProfesor.onsubmit = function(e) {
         e.preventDefault();
-        var idprofesormateria = document.querySelector('#idprofesormateria').value;
-        var nombre = document.querySelector('#listProfesor').value;
-        var grado = document.querySelector('#listGrado').value;
-        var aula = document.querySelector('#listAula').value;
-        var materia = document.querySelector('#listMateria').value;
+        var idalumnoprofesor = document.querySelector('#idalumnoprofesor').value;
+        var alumno = document.querySelector('#listAlumno').value;
+        var profesor = document.querySelector('#listProfesor').value;
         var periodo = document.querySelector('#listPeriodo').value;
         var estado = document.querySelector('#listEstado').value;
 
-        if(nombre == '' || grado == '' || aula == '' || materia == '' || periodo == '' || estado == '') {
+        if(alumno == '' || profesor == '' || periodo == '' || estado == '') {
             swal("Atencion", "Todos los campos son necesarios", "warning");
             return false;
         }
+
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest(): new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/profesor-materia/ajax-profesor-materia.php';
-        var form = new FormData(formProfesorMateria);
+        var url ='./models/alumno-profesor/ajax-alumno-profesor.php';
+        var form = new FormData(formAlumnoProfesor);
         request.open('POST', url, true);
         request.send(form);
         request.onreadystatechange = function() {
             if(request.readyState == 4 && request.status == 200) {
                 var data = JSON.parse(request.responseText);
                 if(request.status) {
-                    $('#modalProfesorMateria').modal ('hide');
-                    formProfesorMateria.reset();
-                    swal("Crear Profesor Materia", data.msg, "success");
-                    tableprofesormateria.ajax.reload();
+                    $('#modalAlumnoProfesor').modal ('hide');
+                    formAlumnoProfesor.reset();
+                    swal("Crear Proceso alumno", data.msg, "success");
+                    tablealumnoprofesor.ajax.reload();
                 } else { 
                     swal("Profesor", data.msg, "error");
                 }
@@ -62,82 +61,48 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 })
-function openModalProfesorMateria() {
-    document.querySelector('#idprofesormateria').value = "";
-    document.querySelector('#tituloModal').innerHTML = 'Nuevo Profesor Materia';
+function openModalAlumnoProfesor() {
+    document.querySelector('#idalumnoprofesor').value = "";
+    document.querySelector('#tituloModal').innerHTML = 'Nuevo Proceso alumno';
     document.querySelector('#action').innerHTML = 'Guardar';
-    document.querySelector('#formProfesorMateria').reset();
-    $('#modalProfesorMateria').modal('show');
+    document.querySelector('#formAlumnoProfesor').reset();
+    $('#modalAlumnoProfesor').modal('show');
 }
 
 window.addEventListener('load', function(){
     showProfesor();
-    showGrado();
-    showAula();
-    showMateria();
+    showAlumno();
     showPeriodo();
 },false);
 
 function showProfesor() {
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/options/options-profesor.php';
+        var url ='./models/options/options-aprofesor.php';
         request.open('GET',url,true);
         request.send();
         request.onreadystatechange = function() {
             if(request.readyState == 4 && request.status == 200) {
                 var data = JSON.parse(request.responseText);
                 data.forEach(function(valor) {
-                    data += '<option value="'+valor.profesor_id+'">'+valor.nombre+'</option>'; 
+                    data += '<option value="'+valor.pm_id+'">Profesor: '+valor.nombre+', Grado: '+valor.nombre_grado+', Aula: '+valor.nombre_aula+', Materia: '+valor.nombre_materia+'</option>'; 
                 });
                 document.querySelector('#listProfesor').innerHTML = data;
             }
         }
     }
 
-    function showGrado() {
+    function showAlumno() {
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/options/options-grado.php';
+        var url ='./models/options/options-alumno.php';
         request.open('GET',url,true);
         request.send();
         request.onreadystatechange = function() {
             if(request.readyState == 4 && request.status == 200) {
                 var data = JSON.parse(request.responseText);
                 data.forEach(function(valor) {
-                    data += '<option value="'+valor.grado_id+'">'+valor.nombre_grado+'</option>'; 
+                    data += '<option value="'+valor.alumno_id+'">'+valor.nombre_alumno+'</option>'; 
                 });
-                document.querySelector('#listGrado').innerHTML = data;
-            }
-        }
-    }
-
-    function showAula() {
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/options/options-aula.php';
-        request.open('GET',url,true);
-        request.send();
-        request.onreadystatechange = function() {
-            if(request.readyState == 4 && request.status == 200) {
-                var data = JSON.parse(request.responseText);
-                data.forEach(function(valor) {
-                    data += '<option value="'+valor.aula_id+'">'+valor.nombre_aula+'</option>'; 
-                });
-                document.querySelector('#listAula').innerHTML = data;
-            }
-        }
-    }
-
-    function showMateria() {
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/options/options-materia.php';
-        request.open('GET',url,true);
-        request.send();
-        request.onreadystatechange = function() {
-            if(request.readyState == 4 && request.status == 200) {
-                var data = JSON.parse(request.responseText);
-                data.forEach(function(valor) {
-                    data += '<option value="'+valor.materia_id+'">'+valor.nombre_materia+'</option>'; 
-                });
-                document.querySelector('#listMateria').innerHTML = data;
+                document.querySelector('#listAlumno').innerHTML = data;
             }
         }
     }
@@ -158,35 +123,33 @@ function showProfesor() {
         }
     }
 
-function editarProfesorMateria(id){
-    var idprofesormateria = id;
-    document.querySelector('#tituloModal').innerHTML = 'Editar Profesor Materia';
+function editarAlumnoProfesor(id){
+    var idalumnoprofesor = id;
+    document.querySelector('#tituloModal').innerHTML = 'Editar Proceso Alumno';
     document.querySelector('#action').innerHTML = 'Actualizar';
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest(): new ActiveXObject('Microsoft.XMLHTTP');
-    var url ='./models/profesor-materia/edit-profesor-materia.php?id='+idprofesormateria;
+    var url ='./models/alumno-profesor/edit-alumno-profesor.php?id='+idalumnoprofesor;
     request.open('GET', url, true);
     request.send();
     request.onreadystatechange = function() {
         if(request.readyState == 4 && request.status == 200) {
             var data = JSON.parse(request.responseText);
             if(request.status) {
-                document.querySelector('#idprofesormateria').value = data.data.pm_id;
-                document.querySelector('#listProfesor').value= data.data.profesor_id;
-                document.querySelector('#listGrado').value= data.data.grado_id;
-                document.querySelector('#listAula').value= data.data.aula_id;
-                document.querySelector('#listMateria').value= data.data.materia_id;
+                document.querySelector('#idalumnoprofesor').value = data.data.ap_id;
+                document.querySelector('#listAlumno').value= data.data.alumno_id;               
+                document.querySelector('#listProfesor').value= data.data.pm_id;
                 document.querySelector('#listPeriodo').value= data.data.periodo_id;
-                document.querySelector('#listEstado').value = data.data.estadopm;
+                document.querySelector('#listEstado').value = data.data.estadoap;
 
-                $('#modalProfesorMateria').modal('show');
+                $('#modalAlumnoProfesor').modal('show');
             } else { 
-                swal("Profesor", data.msg, "error");
+                swal("Atención", data.msg, "error");
             }
         }
     }
 }
-function eliminarProfesorMateria(id){
-    var idprofesormateria = id;
+function eliminarAlumnoProfesor(id){
+    var idalumnoprofesor = id;
     swal({
         title: "Eliminar proceso",
         text: "¿Esta seguro que desea eliminar el proceso?",
@@ -197,9 +160,9 @@ function eliminarProfesorMateria(id){
       .then((willDelete) => {
         if (willDelete) {
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var url ='./models/profesor-materia/delet-profesor-materia.php';
+            var url ='./models/alumno-profesor/delet-alumno-profesor.php';
             request.open('POST', url, true);
-            var strData = "id="+idprofesormateria;
+            var strData = "id="+idalumnoprofesor;
             request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function() {
@@ -207,7 +170,7 @@ function eliminarProfesorMateria(id){
                     var data = JSON.parse(request.responseText);
                     if(data.status) {
                         swal("Eliminar", data.msg, "success");
-                        tableprofesormateria.ajax.reload();
+                        tablealumnoprofesor.ajax.reload();
                     } else { 
                         swal("Atencion", data.msg, "error");
                     }
