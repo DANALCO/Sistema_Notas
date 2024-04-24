@@ -4,6 +4,8 @@
         header('Location: administrador/');
     } else if(!empty($_SESSION['activeP'])) {
         header('Location: profesor/');
+    }else if(!empty($_SESSION['activeA'])) {
+        header('Location: alumno/');
     }
 ?>
 
@@ -34,6 +36,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profesor</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="alumno-tab" data-toggle="tab" href="#alumno" role="tab" aria-controls="alumno" aria-selected="false">Alumno</a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -54,6 +59,16 @@
                         <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
                         <div id="messageProfesor"></div>
                         <button id="loginProfesor" type="button">INICIAR SESION</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="alumno" role="tabpanel" aria-labelledby="alumno-tab">
+                    <form action="" onsubmit="return validar()">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" name="usuarioAlumno" id="usuarioAlumno" placeholder="Nombre de usuario">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="passAlumno" id="passAlumno" placeholder="Contraseña">
+                        <div id="messageAlumno"></div>
+                        <button id="loginAlumno" type="button">INICIAR SESION</button>
                     </form>
                 </div>
             </div>

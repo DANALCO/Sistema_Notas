@@ -7,9 +7,8 @@ if(!empty($_GET['curso'])){
     require_once 'includes/header.php';
     require_once '../includes/conexion.php';
     require_once '../includes/funciones.php';
-    require_once 'includes/modals/modal_contenido.php';
 
-    $idprofesor = intval($_SESSION['profesor_id']);
+    $idAlumno = intval($_SESSION['alumno_id']);
 
 
     $sql = "SELECT * FROM contenidos as c INNER JOIN profesor_materia as pm ON c.pm_id = pm.pm_id WHERE pm.pm_id = $curso";
@@ -21,7 +20,6 @@ if(!empty($_GET['curso'])){
     <div class="app-title">
         <div>
             <h1><i class="fa fa-dashboard"></i>Contenidos A Evaluar</h1>
-            <button class="btn btn-success" type="button" onclick="openModalContenido()">Nuevo Contenido</button>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -37,9 +35,7 @@ if(!empty($_GET['curso'])){
                 <div class="title-title-w-btn">
                     <h3 class="title"><?= $data['titulo']; ?></h3>
                     <p>
-                        <button class="btn btn-warning icon-btn icon-btn" onclick="editarContenido(<?= $data['contenido_id']; ?>)"><i class="fa fa-edit"></i>Editar Contenido</button>
-                        <button class="btn btn-danger icon-btn" onclick="eliminarContenido(<?= $data['contenido_id']; ?>)"><i class="fa fa-delet"></i>Eliminar Contenido</button>
-                        <a class="btn btn-primary" href="evaluacion.php?curso=<?=$data['pm_id']; ?>&contenido=<?= $data['contenido_id']; ?>"><i class="fa fa-edit"></i> Evaluacion</a>
+                        <a class="btn btn-primary" href="evaluacion.php?curso=<?=$data['pm_id']; ?>&contenido=<?= $data['contenido_id']; ?>"><i class="fa fa-edit"></i>Ver Evaluación</a>
                     </p>
                 </div>
                 <div class="title-body">

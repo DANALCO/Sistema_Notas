@@ -5,6 +5,9 @@ $(document).ready(function () {
     $('#loginProfesor').on('click', function () {
         loginProfesor();
     });
+    $('#loginAlumno').on('click', function () {
+        loginAlumno();
+    });
 })
 
 
@@ -43,6 +46,26 @@ function loginProfesor() {
 
             if (data.indexOf('Redirecting') >= 0) {
                 window.location = 'profesor/';
+            }
+        }   
+    })
+}
+
+function loginAlumno() {
+    var loginAlumno = $('#usuarioAlumno').val();
+    var passAlumno = $('#passAlumno').val();
+    $.ajax({
+        url: './includes/loginAlumno.php',
+        method: 'POST',
+        data: {
+            loginAlumno:loginAlumno,
+            passAlumno:passAlumno
+        },
+        success: function (data) {
+            $('#messageAlumno').html(data);
+
+            if (data.indexOf('Redirecting') >= 0) {
+                window.location = 'alumno/';
             }
         }   
     })

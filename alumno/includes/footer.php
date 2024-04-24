@@ -7,7 +7,9 @@
     <script src="js/plugins/pace.min.js"></script>
     <script src="https://kit.fontawesome.com/0f12a91c95.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!--funciones-->
+    <!--tablas-->
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
     <!-- Page specific javascripts-->
   </body>
 </html>
