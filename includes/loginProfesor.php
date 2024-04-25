@@ -16,7 +16,7 @@ if(!empty($_POST)) {
         if($query->rowCount() > 0) {
             if(password_verify($pass, $result['clave'])) {
                 $_SESSION['activeP'] = true;
-                $_SESSION['profesor_id'] = - $result['profesor_id'];
+                $_SESSION['profesor_id'] = $result['profesor_id'];
                 $_SESSION['nombre'] = $result['nombre'];
                 $_SESSION['cedula'] = $result['cedula'];
                 

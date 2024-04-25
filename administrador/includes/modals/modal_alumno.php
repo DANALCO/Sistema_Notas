@@ -27,6 +27,10 @@
             <input type="text" class="form-control" id="cedula" name="cedula">
           </div>
           <div class="form-group">
+            <label for="control-label">Clave:</label>
+            <input type="password" class="form-control" id="clave" name="clave">
+          </div>
+          <div class="form-group">
             <label for="control-label">Telefono:</label>
             <input type="text" class="form-control" id="telefono" name="telefono">
           </div>

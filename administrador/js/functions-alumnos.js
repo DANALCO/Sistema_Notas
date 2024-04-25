@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded',function(){
         var nombre = document.querySelector('#edad').value;
         var direccion = document.querySelector('#direccion').value;
         var cedula = document.querySelector('#cedula').value;
+        var clave = document.querySelector('#clave').value;
         var telefono = document.querySelector('#telefono').value;
         var correo = document.querySelector('#correo').value;
         var fecha_nac = document.querySelector('#fecha_nac').value;
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 })
-function openModal() {
+function openModalAlumno() {
     document.querySelector('#idalumno').value = "";
     document.querySelector('#tituloModal').innerHTML = 'Nuevo Alumno';
     document.querySelector('#action').innerHTML = 'Guardar';

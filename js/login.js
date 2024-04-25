@@ -5,6 +5,9 @@ $(document).ready(function () {
     $('#loginProfesor').on('click', function () {
         loginProfesor();
     });
+    $('#loginAlumno').on('click', function () {
+        loginAlumno();
+    });
 })
 
 
@@ -24,7 +27,7 @@ function loginUsuario() {
             if (data.indexOf('Redirecting') >= 0) {
                 window.location = 'administrador/';
             }
-        }   
+        }
     })
 }
 
@@ -35,8 +38,8 @@ function loginProfesor() {
         url: './includes/loginProfesor.php',
         method: 'POST',
         data: {
-            loginProfesor:loginProfesor,
-            passProfesor:passProfesor
+            loginProfesor: loginProfesor,
+            passProfesor: passProfesor
         },
         success: function (data) {
             $('#messageProfesor').html(data);
@@ -44,6 +47,26 @@ function loginProfesor() {
             if (data.indexOf('Redirecting') >= 0) {
                 window.location = 'profesor/';
             }
-        }   
+        }
+    })
+}
+
+function loginAlumno() {
+    var loginAlumno = $('#usuarioAlumno').val();
+    var passAlumno = $('#passAlumno').val();
+    $.ajax({
+        url: './includes/loginAlumno.php',
+        method: 'POST',
+        data: {
+            loginAlumno: loginAlumno,
+            passAlumno: passAlumno
+        },
+        success: function (data) {
+            $('#messageAlumno').html(data);
+
+            if (data.indexOf('Redirecting') >= 0) {
+                window.location = 'alumno/';
+            }
+        }
     })
 }
