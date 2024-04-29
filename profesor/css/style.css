@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.main-cont {
+    background: #f2f2f2;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.desc-header {
+    width: 100%;
+    height: auto;
+    text-align: center;  
+}
+
+.desc-header img {
+    width: 90%;
+}
+
+.desc-header p {
+    font-size: 2em;
+    color: #336666;
+}
+
+.cont-header {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont-header h1 {
+    color: #336666;
+}
+
+.cont-header form {
+    width: 350px;
+    height: auto;
+    border: 1px solid #336666;
+    padding: 1em;
+    margin: 2em;
+    border-radius: 1em;
+}
+
+.cont-header form label {
+    display: block;
+    padding: 10px;
+}
+
+input {
+    width: 100%;
+    text-align: left;
+}
+
+#loginUsuario, #loginProfesor {
+    display: block;
+    width: 100%;
+    padding: .7em;
+    border: none;
+    border-radius: 8px;
+    background: #153744;
+    color: #fff;
+    cursor: pointer;
+}
+
+.alert {
+    color: red;
+}
+
+.app-sidebar__user-avatar {
+    width: 60px;
+    padding: 3px;
+    background: #fff;
+}
+.col-md-12-edit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 81vh;
+}
+.col-md-12-edit img{
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    width: 60%;
+}
+@media (max-width: 767px) {
+    .col-md-12-edit img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+    }
+}
+@media (max-width: 991px){
+    .col-md-12-edit img{
+        width: 80%;
+    }
+}
+.app-sidebar, .app-nav ,.app-header{
+    background-color: #564266;
+}
+.app-header__logo {
+    background-color: #6D5C7B;
+}
+.app-menu__item.active, .app-menu__item:hover, .app-menu__item:focus {
+    background: #3a2d44;
+}
+.app-sidebar__toggle:hover, .app-sidebar__toggle.active, .app-sidebar__toggle:focus{
+    background: #3a2d44;
+}
+.app-menu__label{
+    padding: 0 0 0 10px;
+}
+
+.custom-text {
+    color: white;
+    font-weight: bold;
+}
+.bg-custom {
+    
+    background-color: rgba(109, 92, 123, 0.85);
+}
+.btn-info{
+    --bs-btn-color: #fff; /* Cambiado a blanco */
+    --bs-btn-bg: #564266; /* Cambiado a #564266 */
+    --bs-btn-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-hover-color: #fff; /* Cambiado a blanco */
+    --bs-btn-hover-bg: #645372; /* Cambiado a #564266 */
+    --bs-btn-hover-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-focus-shadow-rgb: 11, 172, 204;
+    --bs-btn-active-color: #fff; /* Cambiado a blanco */
+    --bs-btn-active-bg: #645372; /* Color ligeramente más claro */
+    --bs-btn-active-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff; /* Cambiado a blanco */
+    --bs-btn-disabled-bg: #564266; /* Cambiado a #564266 */
+    --bs-btn-disabled-border-color: #564266; /* Cambiado a #564266 */
+     
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.badge-medio {
+    --bs-badge-padding-x: 0.65em;
+    --bs-badge-padding-y: 0.35em;
+    --bs-badge-font-size: 0.75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #FFF;
+    --bs-badge-border-radius: var(--bs-border-radius);
+    background: rgb(214, 193, 5);
+    display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-size: var(--bs-badge-font-size);
+    font-weight: var(--bs-badge-font-weight);
+    line-height: 1;
+    color: var(--bs-badge-color);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
+  }
