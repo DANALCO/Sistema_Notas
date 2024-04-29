@@ -21,7 +21,11 @@ body {
 }
 
 .main-cont {
+<<<<<<< HEAD
     background: #6D5C7B;
+=======
+    background: #f2f2f2;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
     width: 100%;
     height: 100vh;
     display: grid;
@@ -40,9 +44,15 @@ body {
     width: 90%;
 }
 
+<<<<<<< HEAD
 .desc-header h1 {
     margin-top: 20px;
     color: #fff;
+=======
+.desc-header p {
+    font-size: 2em;
+    color: #336666;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
 }
 
 .cont-header {
@@ -56,13 +66,21 @@ body {
 }
 
 .cont-header h1 {
+<<<<<<< HEAD
     color: #564266;
+=======
+    color: #336666;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
 }
 
 .cont-header form {
     width: 350px;
     height: auto;
+<<<<<<< HEAD
     border: 1px solid #564266;
+=======
+    border: 1px solid #336666;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
     padding: 1em;
     margin: 2em;
     border-radius: 1em;
@@ -78,20 +96,29 @@ input {
     text-align: center;
 }
 
+<<<<<<< HEAD
 #loginUsuario, #loginProfesor, #loginAlumno {
     margin-top: 20px;
+=======
+#loginUsuario, #loginProfesor {
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
     display: block;
     width: 100%;
     padding: .7em;
     border: none;
     border-radius: 8px;
+<<<<<<< HEAD
     background: #6D5C7B;
+=======
+    background: #153744;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
     color: #fff;
     cursor: pointer;
 }
 
 .alert {
     color: red;
+<<<<<<< HEAD
 }
 
 .main-cont img{
@@ -108,3 +135,6 @@ input {
         transform: translate(-50%, -50%);
     }
 }
+=======
+}
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66

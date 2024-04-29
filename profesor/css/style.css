@@ -75,7 +75,11 @@ body {
 
 input {
     width: 100%;
+<<<<<<< HEAD
     text-align: left;
+=======
+    text-align: center;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
 }
 
 #loginUsuario, #loginProfesor {
@@ -139,6 +143,7 @@ input {
 }
 .app-menu__label{
     padding: 0 0 0 10px;
+<<<<<<< HEAD
 }
 
 .custom-text {
@@ -188,3 +193,6 @@ input {
     vertical-align: baseline;
     border-radius: var(--bs-badge-border-radius);
   }
+=======
+}
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
