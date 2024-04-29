@@ -75,7 +75,19 @@ body {
 
 input {
     width: 100%;
+<<<<<<< HEAD
     text-align: center;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    text-align: left;
+=======
+    text-align: center;
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
+=======
+    text-align: center;
+>>>>>>> ebccd87b7d06dca01d7c509e93888b1f9b88a962
+>>>>>>> main
 }
 
 #loginUsuario, #loginProfesor {
@@ -139,4 +151,64 @@ input {
 }
 .app-menu__label{
     padding: 0 0 0 10px;
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+
+.custom-text {
+    color: white;
+    font-weight: bold;
+}
+.bg-custom {
+    
+    background-color: rgba(109, 92, 123, 0.85);
+}
+.btn-info{
+    --bs-btn-color: #fff; /* Cambiado a blanco */
+    --bs-btn-bg: #564266; /* Cambiado a #564266 */
+    --bs-btn-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-hover-color: #fff; /* Cambiado a blanco */
+    --bs-btn-hover-bg: #645372; /* Cambiado a #564266 */
+    --bs-btn-hover-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-focus-shadow-rgb: 11, 172, 204;
+    --bs-btn-active-color: #fff; /* Cambiado a blanco */
+    --bs-btn-active-bg: #645372; /* Color ligeramente más claro */
+    --bs-btn-active-border-color: #564266; /* Cambiado a #564266 */
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff; /* Cambiado a blanco */
+    --bs-btn-disabled-bg: #564266; /* Cambiado a #564266 */
+    --bs-btn-disabled-border-color: #564266; /* Cambiado a #564266 */
+     
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.badge-medio {
+    --bs-badge-padding-x: 0.65em;
+    --bs-badge-padding-y: 0.35em;
+    --bs-badge-font-size: 0.75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #FFF;
+    --bs-badge-border-radius: var(--bs-border-radius);
+    background: rgb(214, 193, 5);
+    display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-size: var(--bs-badge-font-size);
+    font-weight: var(--bs-badge-font-weight);
+    line-height: 1;
+    color: var(--bs-badge-color);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
+  }
+=======
+}
+>>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
+=======
+}
+>>>>>>> ebccd87b7d06dca01d7c509e93888b1f9b88a962
+>>>>>>> main
