@@ -27,7 +27,6 @@
                         <th>GRADO</th>
                         <th>AULA</th>
                         <th>MATERIA</th>
-                        <th>PERIODO</th>
                         <th>ESTADO</th>
                         </tr>
                     </thead>

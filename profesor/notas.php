@@ -1,16 +1,17 @@
 <?php
+// Verificar si se recibió el parámetro 'curso' en la URL
 if(!empty($_GET['curso'])){
-    $curso = $_GET['curso'];
+    $curso = $_GET['curso'];// Obtener el ID del curso desde la URL
 }else{
     header("Location: ./");
 }
     require_once 'includes/header.php';
     require_once '../includes/conexion.php';
-
+// Obtener el ID del profesor desde la sesión
     $idprofesor = intval($_SESSION['profesor_id']);
 
-
-    $sqlc = "SELECT * FROM alumno_profesor as ap INNER JOIN profesor_materia as pm ON ap.pm_id = pm.pm_id INNER JOIN alumnos as al ON ap.alumno_id = al.alumno_id WHERE pm.profesor_id = $idprofesor AND pm.pm_id = $curso GROUP BY al.alumno_id";
+// Consulta SQL para obtener los alumnos asociados al curso específico y al profesor
+    $sqlc = "SELECT * FROM alumno_profesor as ap INNER JOIN profesor_materia as pm ON ap.pm_id = pm.pm_id INNER JOIN alumnos as al ON ap.alumno_id = al.alumno_id WHERE pm.profesor_id = $idprofesor AND pm.pm_id = $curso GROUP BY al.alumno_id";// Agrupar por ID de alumno
     $queryc = $pdo->prepare($sqlc);
     $queryc->execute();
     $rowc = $queryc->rowCount();
@@ -43,6 +44,7 @@ if(!empty($_GET['curso'])){
                                 ?>
                                 <tr>
                                     <td><?= $data['nombre_alumno'] ?></td>
+                                    <!-- Enlace para ver las notas del alumno -->
                                     <td><a class="btn btn-primary btn-sm" title="Ver Notas" href="list-notas.php?alumno=<?= $data['alumno_id'] ?>&curso=<?= $data['pm_id'] ?>"><i class="fas fa-list"></i></a></td>
                                 </tr>
                             <?php 

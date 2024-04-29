@@ -19,8 +19,6 @@
     <li><a class="app-menu__item" href="lista_grados.php"><i class="fa-solid fa-medal" style="color: #ffffff;"></i><span class="app-menu__label">Grados</span></a></li>
     <li><a class="app-menu__item" href="lista_aulas.php"><i class="fa-solid fa-city" style="color: #ffffff;"></i><span class="app-menu__label">Aulas</span></a></li>
     <li><a class="app-menu__item" href="lista_materias.php"><i class="fa-solid fa-book-bookmark" style="color: #ffffff;"></i><span class="app-menu__label">Materias</span></a></li>
-    <li><a class="app-menu__item" href="lista_periodos.php"><i class="fa-regular fa-calendar-days" style="color: #ffffff;"></i><span class="app-menu__label">Periodos</span></a></li>
-    <li><a class="app-menu__item" href="lista_actividad.php"><i class="fa-solid fa-book-open" style="color: #ffffff;"></i><span class="app-menu__label">Actividad</span></a></li>
     <li><a class="app-menu__item" href="lista_profesor_materia.php"><i class="fa-solid fa-chalkboard-user" style="color: #ffffff;"></i><span class="app-menu__label">Profesor Materia</span></a></li>
     <li><a class="app-menu__item" href="lista_alumno_profesor.php"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i><span class="app-menu__label">Alumno Profesor</span></a></li>
     <li><a class="app-menu__item" href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i><span class="app-menu__label">Logout</span></a></li>

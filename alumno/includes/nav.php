@@ -58,6 +58,7 @@ $rown = $queryn->rowCount();
         }?>
       </ul>
     </li>
+    <li><a class="app-menu__item" href="general.php"><i class="fa-brands fa-readme" style="color: #ffffff;"></i><span class="app-menu__label">Reporte General</span></a></li>
     <li><a class="app-menu__item" href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i><span class="app-menu__label">Logout</span></a></li>
   </ul>
 </aside>

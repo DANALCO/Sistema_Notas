@@ -45,6 +45,14 @@ document.addEventListener('DOMContentLoaded',function(){
             swal("Atencion", "Todos los campos son necesarios", "warning");
             return false;
         }
+        if(cedula < 1) {
+            swal("Atencion", "La cedula no es valida", "warning");
+            return false;
+        }
+        if(telefono < 1) {
+            swal("Atencion", "El telefono no es valida", "warning");
+            return false;
+        }
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest: new ActiveXObject('Microsoft.XMLHTTP');
         var url = './models/profesores/ajax-profesores.php';
         var form = new FormData(formProfesor);

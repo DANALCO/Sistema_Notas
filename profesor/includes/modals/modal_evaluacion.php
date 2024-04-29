@@ -23,10 +23,6 @@
             <label for="control-label">Fecha Limite:</label>
             <input type="date" class="form-control" id="fecha" name="fecha">
           </div>
-          <div class="form-group">
-            <label for="control-label">Valor De La Evaluacion:</label>
-            <input type="text" class="form-control" id="valor" name="valor">
-          </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary" id="action">Guardar</button>

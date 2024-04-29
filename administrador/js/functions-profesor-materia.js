@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded',function(){
         { "data": "nombre_grado" },
         { "data": "nombre_aula" },
         { "data": "nombre_materia" },
-        { "data": "nombre_periodo" },
         { "data": "estadopm" }
     ],
     "responsive": true,
@@ -35,10 +34,9 @@ document.addEventListener('DOMContentLoaded',function(){
         var grado = document.querySelector('#listGrado').value;
         var aula = document.querySelector('#listAula').value;
         var materia = document.querySelector('#listMateria').value;
-        var periodo = document.querySelector('#listPeriodo').value;
         var estado = document.querySelector('#listEstado').value;
 
-        if(nombre == '' || grado == '' || aula == '' || materia == '' || periodo == '' || estado == '') {
+        if(nombre == '' || grado == '' || aula == '' || materia == '' || estado == '') {
             swal("Atencion", "Todos los campos son necesarios", "warning");
             return false;
         }
@@ -75,7 +73,6 @@ window.addEventListener('load', function(){
     showGrado();
     showAula();
     showMateria();
-    showPeriodo();
 },false);
 
 function showProfesor() {
@@ -142,22 +139,6 @@ function showProfesor() {
         }
     }
 
-    function showPeriodo() {
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var url ='./models/options/options-periodo.php';
-        request.open('GET',url,true);
-        request.send();
-        request.onreadystatechange = function() {
-            if(request.readyState == 4 && request.status == 200) {
-                var data = JSON.parse(request.responseText);
-                data.forEach(function(valor) {
-                    data += '<option value="'+valor.periodo_id+'">'+valor.nombre_periodo+'</option>'; 
-                });
-                document.querySelector('#listPeriodo').innerHTML = data;
-            }
-        }
-    }
-
 function editarProfesorMateria(id){
     var idprofesormateria = id;
     document.querySelector('#tituloModal').innerHTML = 'Editar Profesor Materia';
@@ -175,7 +156,6 @@ function editarProfesorMateria(id){
                 document.querySelector('#listGrado').value= data.data.grado_id;
                 document.querySelector('#listAula').value= data.data.aula_id;
                 document.querySelector('#listMateria').value= data.data.materia_id;
-                document.querySelector('#listPeriodo').value= data.data.periodo_id;
                 document.querySelector('#listEstado').value = data.data.estadopm;
 
                 $('#modalProfesorMateria').modal('show');

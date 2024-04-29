@@ -9,36 +9,39 @@
       </div>
       <div class="modal-body">
         <form id="formAlumnoProfesor" name="formAlumnoProfesor">
-        <input type="hidden" name="idalumnoprofesor" id="idalumnoprofesor" value="">
-        <div class="form-group">
+          <!-- Campo oculto para almacenar el ID del alumno o profesor -->
+          <input type="hidden" name="idalumnoprofesor" id="idalumnoprofesor" value="">
+          <!-- Selección del alumno -->
+          <div class="form-group">
+            <!-- Lista desplegable para seleccionar el alumno (se llenará mediante AJAX) -->
+            <!-- Esto se hace por medio del js -->
             <label for="listEstado">Seleccione el Alumno</label>
             <select class="form-control" name="listAlumno" id="listAlumno">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <!-- Lista desplegable para seleccionar el profesor (se llenará mediante AJAX) -->
+          <!-- Esto se hace por medio del js -->
+          <div class="form-group">
             <label for="listGrado">Seleccione el Profesor</label>
             <select class="form-control" name="listProfesor" id="listProfesor">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
-            <label for="listEstado">Seleccione el Periodo</label>
-            <select class="form-control" name="listPeriodo" id="listPeriodo">
-                <!-- CONTENIDO AJAX -->
-            </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <!-- Selección del estado -->
+          <div class="form-group">
             <label for="listEstado">Estado</label>
             <select class="form-control" name="listEstado" id="listEstado">
-                <option value="1">Activo</option>
-                <option value="2">Inactivo</option>
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
             </select>
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="action">Guardar</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- Botón para cerrar el modal -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <!-- Botón para guardar los datos del formulario -->
+            <button type="submit" class="btn btn-primary" id="action">Guardar</button>
+          </div>
         </form>
       </div>
     </div>

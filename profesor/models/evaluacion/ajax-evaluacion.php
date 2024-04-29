@@ -9,17 +9,16 @@ if(!empty($_POST)) {
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         $fecha = $_POST['fecha'];
-        $valor = $_POST['valor'];
 
         if($idevaluacion == '') {
-            $sqlInsert = 'INSERT INTO evaluaciones (titulo,descripcion,fecha,porcentaje,contenido_id) VALUES (?,?,?,?,?)';
+            $sqlInsert = 'INSERT INTO evaluaciones (titulo,descripcion,fecha,contenido_id) VALUES (?,?,?,?)';
             $queryInsert = $pdo->prepare($sqlInsert);
-            $request = $queryInsert->execute(array($titulo, $descripcion, $fecha, $valor, $idcontenido));
+            $request = $queryInsert->execute(array($titulo, $descripcion, $fecha, $idcontenido));
             $accion = 1;
         } else {
-            $sqlUpdate = 'UPDATE evaluaciones SET titulo = ?, descripcion =?,fecha = ?,porcentaje = ?,contenido_id = ? WHERE evaluacion_id = ?';
+            $sqlUpdate = 'UPDATE evaluaciones SET titulo = ?, descripcion =?,fecha = ?,contenido_id = ? WHERE evaluacion_id = ?';
             $queryUpdate = $pdo->prepare($sqlUpdate);
-            $request = $queryUpdate->execute(array($titulo, $descripcion, $fecha, $valor, $idcontenido,$idevaluacion));
+            $request = $queryUpdate->execute(array($titulo, $descripcion, $fecha, $idcontenido,$idevaluacion));
             $accion = 2;
         } 
         if ($request > 0) {

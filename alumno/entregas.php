@@ -1,25 +1,31 @@
 <?php
-    if(!empty($_GET['curso']) || !empty($_GET['contenido'])) {
+// Verifica si se han proporcionado los parámetros 'curso', 'contenido', y 'eva' a través de GET
+if(!empty($_GET['curso']) || !empty($_GET['contenido'])) {
     $curso = $_GET['curso'];
     $contenido = $_GET['contenido'];
     $evaluacion = $_GET['eva'];
-    } else {
+} else {
+    // Si falta alguno de los parámetros requeridos, redirige al usuario a la página principal
     header("Location: ./");
-    }
-
+}
+// Incluye el encabezado de la página
 require_once 'includes/header.php';
 require_once '../includes/conexion.php';
 
+// Obtiene el ID del alumno almacenado en la sesión
 $idAlumno = $_SESSION['alumno_id'];
 
+// Consulta SQL para verificar si el alumno ya realizó la entrega de esta evaluación
 $sqla = "SELECT * FROM ev_entregadas as ev INNER JOIN alumnos as a ON ev.alumno_id = a.alumno_id INNER JOIN evaluaciones as eva ON ev.evaluacion_id = eva.evaluacion_id INNER JOIN contenidos as c ON eva.contenido_id = c.contenido_id WHERE ev.evaluacion_id = ? AND a.alumno_id = ?";
 $querya = $pdo->prepare($sqla);
 $querya->execute(array($evaluacion,$idAlumno));
 $rowa = $querya->rowCount();
 
+// Obtiene la fecha actual
 date_default_timezone_set("America/Bogota");
 $fecha = date('Y-m-d');
 
+// Consulta SQL para obtener la fecha límite de la evaluación actual
 $sqlf = "SELECT * FROM evaluaciones WHERE contenido_id = $contenido AND evaluacion_id = $evaluacion";
 $queryf = $pdo->prepare($sqlf);
 $queryf->execute();
@@ -38,17 +44,20 @@ $fechaLimite = $result['fecha'];
             <li class="breadcrumb-item"><a href="#">Realizar Entrega</a></li>
         </ul>
     </div>
-        <?php if ($rowa > 0) {
+        <?php // Si el alumno ya realizó la entrega de esta evaluación, muestra un mensaje informativo
+            if ($rowa > 0) {
             while ($data = $querya->fetch()) {
                 $valor = '';
                 $calificacion = '';
                 $ev_entregada = $data['ev_entregada_id'];
-                
+
+                // Consulta SQL para verificar si la entrega fue calificada
                 $sqln = "SELECT * FROM notas as n INNER JOIN ev_entregadas as ev ON n.ev_entregada_id = ev.ev_entregada_id INNER JOIN alumnos as a ON ev.alumno_id = a.alumno_id WHERE n.ev_entregada_id = $ev_entregada AND a.alumno_id = $idAlumno";
                 $queryn = $pdo->prepare($sqln);
                 $queryn->execute();
                 $datan = $queryn->rowCount();
                 $nota = $queryn->fetch();
+                 // Establece el valor y la calificación según el estado de la entrega
                 if ($datan > 0) {
                     $valor = '<kbd class="bg-success">Calificado</kbd>';
                     $calificacion = $nota['valor_nota'];
@@ -57,9 +66,11 @@ $fechaLimite = $result['fecha'];
                     $calificacion = '';
                 }
         ?>
+        <!-- Mensaje de entrega realizada -->
         <div class="row mt-2 bg-success text-white p-2">
             <h3>Ya realizo la entrega</h3>
         </div>
+        <!-- Tabla con el estado de la entrega y la calificación (si está calificada) -->
         <div class="row mt-3">
             <table class="table table-bordered">
                 <thead>
@@ -78,12 +89,14 @@ $fechaLimite = $result['fecha'];
         </div>   
 
         <?php } } else{ ?>
-            <?php if($fecha < $fechaLimite) { ?>
+            <?php // Si la fecha actual es anterior a la fecha límite, muestra el formulario para realizar la entrega
+                if($fecha < $fechaLimite) { ?>
                 <div class="row">
                     <div class="col-md-12">
                     <div class="tile">
             <h3 class="tile-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Realizar Entrega</font></font></h3>
             <div class="tile-body">
+                <!-- Formulario para realizar la entrega -->
               <form class="form-horizontal" id="formEntrega" name="formEntrega" enctype="multipart/form-data">
                 <input type="hidden" name="idevaluacion" id="idevaluacion" value="<?= $evaluacion; ?>">
                 <input type="hidden" name="idalumno" id="idalumno" value="<?= $idAlumno; ?>">
@@ -112,7 +125,7 @@ $fechaLimite = $result['fecha'];
                     </div>
                 </div>
 
-            <?php } else { ?>
+            <?php } else { // Si la fecha actual es posterior a la fecha límite, muestra un mensaje de advertencia?>
                 <div class="row bg-danger p-3 text-white">
                     <h5>Ya no se puede hacer entregas (Fecha limite <?= $fechaLimite; ?>)</h5>
                 </div>
@@ -120,10 +133,12 @@ $fechaLimite = $result['fecha'];
         <?php } ?>
 
     <div class="row">
-        <a href="contenido.php?curso=<?= $curso ?>&contenido=<?= $contenido ?>" class="btn btn-info"><< Volver Atras</a>
+        <!-- Enlace para volver atrás -->
+        <a href="evaluacion.php?curso=<?= $curso ?>&contenido=<?= $contenido ?>" class="btn btn-info"><< Volver Atras</a>
     </div>
 </main>
 <?php
 require_once 'includes/footer.php';
 ?>
+<!-- Incluye el script para el manejo de la entrega (envío del formulario) -->
 <script type="text/javascript" src="js/functions-entrega.js"></script>

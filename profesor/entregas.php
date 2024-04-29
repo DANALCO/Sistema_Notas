@@ -1,31 +1,30 @@
 <?php
-if(!empty($_GET['curso']) || empty($_GET['contenido']) || empty($_GET['eva'])){
-    $curso = $_GET['curso'];
-    $contenido = $_GET['contenido'];
-    $evaluacion = $_GET['eva'];
-}else{
-    header("Location: ./");
+// Verifica si los parámetros 'curso', 'contenido', y 'eva' están presentes en $_GET
+if (!empty($_GET['curso']) || empty($_GET['contenido']) || empty($_GET['eva'])) {
+    $curso = $_GET['curso'];// Asigna el valor del parámetro 'curso' a la variable $curso
+    $contenido = $_GET['contenido'];// Asigna el valor del parámetro 'contenido' a la variable $contenido
+    $evaluacion = $_GET['eva']; // Asigna el valor del parámetro 'eva' a la variable $evaluacion
+} else {
+    header("Location: ./");// Si falta alguno de los parámetros, redirige a la página actual (la raíz del directorio actual)
 }
-    require_once 'includes/header.php';
-    require_once '../includes/funciones.php';
-    require_once '../includes/conexion.php';
+// Incluye los archivos necesarios
+require_once 'includes/header.php';
+require_once '../includes/funciones.php';
+require_once '../includes/conexion.php';
 
-    $idprofesor = intval($_SESSION['profesor_id']);
+// Obtiene el ID del profesor de la sesión actual y lo convierte a entero
+$idprofesor = intval($_SESSION['profesor_id']);
 
-    echo "<script>";
-    echo "console.log('Curso: " . htmlspecialchars($curso) . "');";
-    echo "console.log('Evaluación: " . htmlspecialchars($evaluacion) . "');";
-    echo "console.log('Contenido: " . htmlspecialchars($contenido) . "');";
-    echo "</script>";
-    $sql = "SELECT *,date_format(fecha, '%d/%m/%u') as fecha FROM evaluaciones WHERE contenido_id = $contenido AND evaluacion_id = $evaluacion";
-    $query = $pdo->prepare($sql);
-    $query->execute();
-    $row = $query->rowCount();
-
-    $sqla = "SELECT * FROM ev_entregadas as ev INNER JOIN alumnos as a ON ev.alumno_id = a.alumno_id INNER JOIN evaluaciones as eva ON ev.evaluacion_id = eva.evaluacion_id INNER JOIN contenidos as c ON eva.contenido_id = c.contenido_id WHERE ev.evaluacion_id = ?";
-    $querya = $pdo->prepare($sqla);
-    $querya->execute(array($evaluacion));
-    $rowa = $querya->rowCount();
+// Prepara y ejecuta una consulta SQL para obtener la evaluación específica
+$sql = "SELECT *,date_format(fecha, '%d/%m/%u') as fecha FROM evaluaciones WHERE contenido_id = $contenido AND evaluacion_id = $evaluacion";
+$query = $pdo->prepare($sql);
+$query->execute();
+$row = $query->rowCount();
+// Prepara y ejecuta una consulta SQL para obtener las evaluaciones entregadas para la evaluación específica
+$sqla = "SELECT * FROM ev_entregadas as ev INNER JOIN alumnos as a ON ev.alumno_id = a.alumno_id INNER JOIN evaluaciones as eva ON ev.evaluacion_id = eva.evaluacion_id INNER JOIN contenidos as c ON eva.contenido_id = c.contenido_id WHERE ev.evaluacion_id = ?";
+$querya = $pdo->prepare($sqla);
+$querya->execute(array($evaluacion));
+$rowa = $querya->rowCount();
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -38,24 +37,25 @@ if(!empty($_GET['curso']) || empty($_GET['contenido']) || empty($_GET['eva'])){
         </ul>
     </div>
     <div class="row">
-        <?php if($row > 0) {
-            while($data = $query->fetch()){
+        <?php 
+        // Verifica si se encontraron evaluaciones
+        if ($row > 0) {
+            while ($data = $query->fetch()) {
         ?>
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="title-title-w-btn">
-                    <h3 class="title"><?= $data['titulo']; ?></h3>
+                <div class="col-md-12">
+                    <div class="tile">
+                        <div class="title-title-w-btn">
+                            <h3 class="title"><?= $data['titulo']; ?></h3>
+                        </div>
+                        <div class="title-body">
+                            <b><?= $data['descripcion']; ?></b><br><br>
+                            <b>Fecha: <kbd class="bg-custom"> <?= $data['fecha']; ?></kbd></b><br><br>
+                        </div>
+                    </div>
                 </div>
-                <div class="title-body">
-                    <b><?= $data['descripcion']; ?></b><br><br>
-                    <b>Fecha: <kbd class="bg-custom"> <?= $data['fecha']; ?></kbd></b><br><br>
-                    <b>Valor: <?= $data['porcentaje']; ?></b>
-                </div>
-            </div>
-        </div>
         <?php
             }
-        }?>
+        } ?>
     </div>
     <div class="row">
         <div class="col-md-12 text-center border p-4" style="background-color: #198754;">
@@ -63,26 +63,6 @@ if(!empty($_GET['curso']) || empty($_GET['contenido']) || empty($_GET['eva'])){
         </div>
     </div>
     <div class="row mt-3">
-        <?php if($rowa > 0) {
-            while($data2 = $querya->fetch()) {
-            $valor = '';
-            $cargar = '';
-            $alumno = $data2['alumno_id'];
-            $ev_entregada = $data2['ev_entregada_id'];
-
-            $sqln = "SELECT * FROM notas WHERE ev_entregada_id = $ev_entregada";
-            $queryn = $pdo->prepare($sqln);
-            $queryn->execute();
-            $datan = $queryn->rowCount();
-            if($datan > 0) {
-                $valor = '<kbd class="bg-success">Calificado</kbd>';
-                $cargar = '';
-            } else {
-                require_once 'includes/modals/modal-nota.php';
-                $valor = '<kbd class="bg-danger">Sin Calificar</kbd>';
-                $cargar = '<button class="btn btn-warning" onclick="modalNota()">Cargar Nota</button>';
-            }
-        ?>
         <div class="col-md-12">
             <div class="tile">
                 <table class="table table-bordered">
@@ -96,29 +76,56 @@ if(!empty($_GET['curso']) || empty($_GET['contenido']) || empty($_GET['eva'])){
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td><?php echo $data2['nombre_alumno']; ?></td>
-                        <td><?php echo $data2['observacion']; ?></td>
-                            <td>
-                                <div class="input-group">
-                                    <div class="input-group-text"><i class="fas fa-download"></i></div>
-                                </div>
-                                <a class="btn btn-primary" href="BASE_URL<?= $data2['material_alumno']; ?>" target="_blank">Material</a>
-                            </td>
-                            <td><?= $valor?></td>
-                            <td><?php echo $cargar; ?></td>
-                        </tr>
+                        <?php 
+                        // Verifica si se encontraron evaluaciones entregadas
+                        if ($rowa > 0) {
+                            while ($data2 = $querya->fetch()) {
+                                $valor = '';
+                                $cargar = '';
+                                $alumno = $data2['alumno_id'];
+                                $ev_entregada = $data2['ev_entregada_id'];
+                                 // Consulta para verificar si la evaluación fue calificada
+                                $sqln = "SELECT * FROM notas WHERE ev_entregada_id = $ev_entregada";
+                                $queryn = $pdo->prepare($sqln);
+                                $queryn->execute();
+                                $datan = $queryn->rowCount();
+                                // Determina el estado de la evaluación (calificada o sin calificar)
+                                if ($datan > 0) {
+                                    $valor = '<kbd class="bg-success">Calificado</kbd>';
+                                    $cargar = '';
+                                } else {
+                                    require_once 'includes/modals/modal-nota.php';// Incluye un modal para cargar la nota (no especificado en el código proporcionado)
+                                    $valor = '<kbd class="bg-danger">Sin Calificar</kbd>';
+                                    $cargar = '<button class="btn btn-warning" onclick="modalNota()">Cargar Nota</button>';
+                                }
+                        ?>
+                                <tr>
+                                    <td><?php echo $data2['nombre_alumno']; ?></td>
+                                    <td><?php echo $data2['observacion']; ?></td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="fas fa-download"></i></div>
+                                        </div>
+                                        <a class="btn btn-primary" href="BASE_URL<?= $data2['material_alumno']; ?>" target="_blank">Material</a>
+                                    </td>
+                                    <!-- Estado de la evaluación (calificado o sin calificar) -->
+                                    <td><?= $valor ?></td>
+                                    <!-- Botón para cargar la nota si la evaluación no está calificada -->
+                                    <td><?php echo $cargar; ?></td>
+                                </tr>
+                        <?php }
+                        } ?>
                     </tbody>
-                </table> 
+                </table>
             </div>
         </div>
-        <?php } }?>
     </div>
     <div class="row">
-        <a href="contenido.php?curso=<?= $curso ?>" class="btn btn-info"><< Volver Atras</a>
+        <a href="evaluacion.php?curso=<?= $curso ?>&contenido=<?= $contenido ?>" class="btn btn-info">
+            << Volver Atras</a>
     </div>
 </main>
 <?php
-    require_once 'includes/footer.php';
+require_once 'includes/footer.php';
 ?>
 <script src="js/functions-nota.js"></script>

@@ -1,10 +1,15 @@
 <?php
 session_start();
+// Verifica si hay una sesión activa de administrador y redirige a la página de administrador
 if (!empty($_SESSION['active'])) {
     header('Location: administrador/');
-} else if (!empty($_SESSION['activeP'])) {
+} 
+// Verifica si hay una sesión activa de profesor y redirige a la página de profesor
+else if (!empty($_SESSION['activeP'])) {
     header('Location: profesor/');
-} else if (!empty($_SESSION['activeA'])) {
+} 
+// Verifica si hay una sesión activa de alumno y redirige a la página de alumno
+else if (!empty($_SESSION['activeA'])) {
     header('Location: alumno/');
 }
 ?>
@@ -14,6 +19,7 @@ if (!empty($_SESSION['active'])) {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="./images/gorro-de-graduacion.png" type="image/png">
     <meta name="viewport" content="width-device-width, initial-scale-1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -31,6 +37,7 @@ if (!empty($_SESSION['active'])) {
         <div class="cont-header">
             <h1>Bienvenid@</h1>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- pestañas de navegación para seleccionar tipo de usuario -->
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Administrador</a>
                 </li>
@@ -42,6 +49,7 @@ if (!empty($_SESSION['active'])) {
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+                <!-- Formulario de login para Administrador -->
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <form action="" onsubmit="return validar()">
                         <label for="usuario">Usuario</label>
@@ -52,6 +60,7 @@ if (!empty($_SESSION['active'])) {
                         <button id="loginUsuario" type="button">INICIAR SESION</button>
                     </form>
                 </div>
+                <!-- Formulario de login para Profesor -->
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <form action="" onsubmit="return validar()">
                         <label for="usuario">Usuario</label>
@@ -62,6 +71,7 @@ if (!empty($_SESSION['active'])) {
                         <button id="loginProfesor" type="button">INICIAR SESION</button>
                     </form>
                 </div>
+                <!-- Formulario de login para Alumno -->
                 <div class="tab-pane fade" id="alumno" role="tabpanel" aria-labelledby="alumno-tab">
                     <form action="" onsubmit="return validar()">
                         <label for="usuario">Usuario</label>

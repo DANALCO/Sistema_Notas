@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-04-2024 a las 19:38:14
+-- Tiempo de generación: 28-04-2024 a las 01:19:59
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,18 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `secundariaaftons`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `actividad`
---
-
-CREATE TABLE `actividad` (
-  `actividad_id` int(11) NOT NULL,
-  `nombre_actividad` varchar(100) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -59,8 +47,8 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`alumno_id`, `nombre_alumno`, `edad`, `direccion`, `cedula`, `clave`, `telefono`, `correo`, `fecha_nac`, `fecha_registro`, `estado`, `u_acceso`) VALUES
-(7, 'Juan Carlos Galindo', 13, 'Calle 5 #6-35', '123', '$2y$10$WML.qhPLoK1VVqNJcA41iuYyqFfbVaneyBlpovooQJX6cFp0k7dve', 3169049597, 'Juancarlosgalindo@gmail.com', '2011-04-21', '2024-04-24', 1, '2024-04-25 00:22:40'),
-(8, 'Felipe Gonzales', 15, 'calle 2 #5-21', '555', '$2y$10$p51gXrBH3q5mrMeegx8QR./YkqYQbORKxaxr6QK8tcRtbBWFNxpha', 3206069301, 'Felipe.Gonzales@usco.edu.co', '2009-07-15', '2024-04-24', 1, NULL);
+(7, 'Juan Carlos Galindo', 13, 'Calle 5 #6-35', '123', '$2y$10$WML.qhPLoK1VVqNJcA41iuYyqFfbVaneyBlpovooQJX6cFp0k7dve', 3169049597, 'Juancarlosgalindo@gmail.com', '2011-04-21', '2024-04-24', 1, '2024-04-27 18:01:31'),
+(8, 'Felipe Gonzales', 15, 'calle 2 #5-21', '555', '$2y$10$p51gXrBH3q5mrMeegx8QR./YkqYQbORKxaxr6QK8tcRtbBWFNxpha', 3206069301, 'Felipe.Gonzales@usco.edu.co', '2009-07-15', '2024-04-24', 1, '2024-04-26 23:10:10');
 
 -- --------------------------------------------------------
 
@@ -72,7 +60,6 @@ CREATE TABLE `alumno_profesor` (
   `ap_id` int(11) NOT NULL,
   `alumno_id` int(11) NOT NULL,
   `pm_id` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
   `estadoap` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -80,11 +67,14 @@ CREATE TABLE `alumno_profesor` (
 -- Volcado de datos para la tabla `alumno_profesor`
 --
 
-INSERT INTO `alumno_profesor` (`ap_id`, `alumno_id`, `pm_id`, `periodo_id`, `estadoap`) VALUES
-(6, 7, 10, 6, 1),
-(7, 7, 11, 6, 1),
-(8, 7, 12, 6, 1),
-(9, 8, 10, 6, 1);
+INSERT INTO `alumno_profesor` (`ap_id`, `alumno_id`, `pm_id`, `estadoap`) VALUES
+(6, 7, 10, 1),
+(7, 7, 11, 1),
+(8, 7, 12, 1),
+(9, 8, 10, 1),
+(11, 8, 12, 1),
+(12, 8, 11, 1),
+(13, 8, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +116,8 @@ CREATE TABLE `contenidos` (
 --
 
 INSERT INTO `contenidos` (`contenido_id`, `titulo`, `descripcion`, `material`, `pm_id`) VALUES
-(23, 'Partes de un computador', 'Esta temática abarcara las primeras 2 semanas del año escolar', '../../../uploads/5248/Informatica II - Luis Sanchez.pdf', 10);
+(23, 'Partes de un computador', 'Esta temática abarcara las primeras 2 semanas del año escolar', '../../../uploads/5248/Informatica II - Luis Sanchez.pdf', 10),
+(24, 'Exel', 'vamos a aprender como usar exel', '../../../uploads/3496/Informatica II - Luis Sanchez.pdf', 10);
 
 -- --------------------------------------------------------
 
@@ -139,7 +130,6 @@ CREATE TABLE `evaluaciones` (
   `titulo` varchar(100) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `fecha` date NOT NULL,
-  `porcentaje` varchar(100) NOT NULL,
   `contenido_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -147,10 +137,11 @@ CREATE TABLE `evaluaciones` (
 -- Volcado de datos para la tabla `evaluaciones`
 --
 
-INSERT INTO `evaluaciones` (`evaluacion_id`, `titulo`, `descripcion`, `fecha`, `porcentaje`, `contenido_id`) VALUES
-(6, 'Taller 1', 'Realizar el ejercicio 5 de la pagina 44 del libro', '2024-05-11', '5', 23),
-(7, 'Taller 2', 'Realizar el ejercicio 8 de la pagina 105 del libro', '2024-04-28', '5', 23),
-(8, 'Taller 3', 'Realizar el ejercicio 2 de la pagina 153 del libro', '2024-05-11', '5', 23);
+INSERT INTO `evaluaciones` (`evaluacion_id`, `titulo`, `descripcion`, `fecha`, `contenido_id`) VALUES
+(6, 'Taller 1', 'Realizar el ejercicio 5 de la pagina 44 del libro', '2024-05-11', 23),
+(7, 'Taller 2', 'Realizar el ejercicio 8 de la pagina 105 del libro', '2024-04-28', 23),
+(9, 'Taller 3', 'Realizar un Exel con los temas aprendidos en clase', '2024-05-11', 24),
+(10, 'Taller 4', 'Realizar una lineal del tiempo con la historia de Excel', '2024-05-11', 24);
 
 -- --------------------------------------------------------
 
@@ -171,7 +162,12 @@ CREATE TABLE `ev_entregadas` (
 --
 
 INSERT INTO `ev_entregadas` (`ev_entregada_id`, `evaluacion_id`, `alumno_id`, `material_alumno`, `observacion`) VALUES
-(11, 6, 7, '../../../uploads/7373/Crucigrama Informática worksheet.jpg', 'Entrega de Juan Carlos Galindo, feliz día.');
+(11, 6, 7, '../../../uploads/7373/Crucigrama Informática worksheet.jpg', 'Entrega de Juan Carlos Galindo, feliz día.'),
+(12, 7, 7, '../../../uploads/8701/Crucigrama Informática worksheet.jpg', 'Realizo entrega del trabajo de Juan Carlos Galindo'),
+(13, 6, 8, '../../../uploads/8154/Crucigrama Informática worksheet.jpg', 'Entrega de Felipe Gonzales, buenas noches.'),
+(14, 7, 8, '../../../uploads/1329/Crucigrama Informática worksheet.jpg', 'buenas noches'),
+(15, 9, 7, '../../../uploads/1731/Crucigrama Informática worksheet.jpg', 'Hola'),
+(16, 10, 7, '../../../uploads/5296/UndirectedDegrees.svg.png', 'hi');
 
 -- --------------------------------------------------------
 
@@ -212,7 +208,8 @@ CREATE TABLE `materias` (
 INSERT INTO `materias` (`materia_id`, `nombre_materia`, `estado`) VALUES
 (9, 'Informática', 1),
 (10, 'Quimica', 1),
-(11, 'Programación', 1);
+(11, 'Programación', 1),
+(12, 'Biología', 1);
 
 -- --------------------------------------------------------
 
@@ -232,29 +229,11 @@ CREATE TABLE `notas` (
 --
 
 INSERT INTO `notas` (`nota_id`, `ev_entregada_id`, `valor_nota`, `fecha`) VALUES
-(20, 11, 5, '2024-04-24 21:46:10');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `periodos`
---
-
-CREATE TABLE `periodos` (
-  `periodo_id` int(11) NOT NULL,
-  `nombre_periodo` varchar(100) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `periodos`
---
-
-INSERT INTO `periodos` (`periodo_id`, `nombre_periodo`, `estado`) VALUES
-(6, 'Primer-Periodo', 1),
-(7, 'Segundo-Periodo', 1),
-(8, 'Tercer-Periodo', 1),
-(9, 'Cuarto-Periodo', 1);
+(20, 11, 5, '2024-04-24 21:46:10'),
+(21, 12, 5, '2024-04-25 17:17:41'),
+(22, 14, 5, '2024-04-26 23:18:51'),
+(23, 13, 5, '2024-04-26 23:18:59'),
+(24, 15, 4, '2024-04-27 18:01:07');
 
 -- --------------------------------------------------------
 
@@ -294,7 +273,6 @@ CREATE TABLE `profesor_materia` (
   `aula_id` int(11) NOT NULL,
   `profesor_id` int(11) NOT NULL,
   `materia_id` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
   `estadopm` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -302,11 +280,12 @@ CREATE TABLE `profesor_materia` (
 -- Volcado de datos para la tabla `profesor_materia`
 --
 
-INSERT INTO `profesor_materia` (`pm_id`, `grado_id`, `aula_id`, `profesor_id`, `materia_id`, `periodo_id`, `estadopm`) VALUES
-(10, 15, 7, 6, 9, 6, 1),
-(11, 15, 8, 7, 10, 6, 1),
-(12, 15, 9, 6, 11, 6, 1),
-(14, 16, 7, 6, 9, 6, 1);
+INSERT INTO `profesor_materia` (`pm_id`, `grado_id`, `aula_id`, `profesor_id`, `materia_id`, `estadopm`) VALUES
+(10, 15, 7, 6, 9, 1),
+(11, 15, 8, 7, 10, 1),
+(12, 15, 9, 6, 11, 1),
+(14, 16, 7, 6, 9, 1),
+(15, 15, 9, 7, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -356,12 +335,6 @@ INSERT INTO `usuarios` (`usuario_id`, `nombre`, `usuario`, `clave`, `rol`, `esta
 --
 
 --
--- Indices de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  ADD PRIMARY KEY (`actividad_id`);
-
---
 -- Indices de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
@@ -373,8 +346,7 @@ ALTER TABLE `alumnos`
 ALTER TABLE `alumno_profesor`
   ADD PRIMARY KEY (`ap_id`),
   ADD KEY `alumno_id` (`alumno_id`),
-  ADD KEY `pm_id` (`pm_id`),
-  ADD KEY `periodo_id` (`periodo_id`);
+  ADD KEY `pm_id` (`pm_id`);
 
 --
 -- Indices de la tabla `aulas`
@@ -424,12 +396,6 @@ ALTER TABLE `notas`
   ADD KEY `ev_entregada_id` (`ev_entregada_id`);
 
 --
--- Indices de la tabla `periodos`
---
-ALTER TABLE `periodos`
-  ADD PRIMARY KEY (`periodo_id`);
-
---
 -- Indices de la tabla `profesor`
 --
 ALTER TABLE `profesor`
@@ -443,8 +409,7 @@ ALTER TABLE `profesor_materia`
   ADD KEY `grado_id` (`grado_id`),
   ADD KEY `aula_id` (`aula_id`),
   ADD KEY `profesor_id` (`profesor_id`),
-  ADD KEY `materia_id` (`materia_id`),
-  ADD KEY `periodo_id` (`periodo_id`);
+  ADD KEY `materia_id` (`materia_id`);
 
 --
 -- Indices de la tabla `rol`
@@ -464,12 +429,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  MODIFY `actividad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
@@ -479,7 +438,7 @@ ALTER TABLE `alumnos`
 -- AUTO_INCREMENT de la tabla `alumno_profesor`
 --
 ALTER TABLE `alumno_profesor`
-  MODIFY `ap_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ap_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `aulas`
@@ -491,19 +450,19 @@ ALTER TABLE `aulas`
 -- AUTO_INCREMENT de la tabla `contenidos`
 --
 ALTER TABLE `contenidos`
-  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `evaluaciones`
 --
 ALTER TABLE `evaluaciones`
-  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `ev_entregadas`
 --
 ALTER TABLE `ev_entregadas`
-  MODIFY `ev_entregada_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ev_entregada_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `grados`
@@ -515,19 +474,13 @@ ALTER TABLE `grados`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `materia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `materia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de la tabla `periodos`
---
-ALTER TABLE `periodos`
-  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
@@ -539,7 +492,7 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `profesor_materia`
 --
 ALTER TABLE `profesor_materia`
-  MODIFY `pm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `pm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -562,8 +515,7 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `alumno_profesor`
   ADD CONSTRAINT `alumno_profesor_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`alumno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `alumno_profesor_ibfk_2` FOREIGN KEY (`pm_id`) REFERENCES `profesor_materia` (`pm_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `alumno_profesor_ibfk_3` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`periodo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `alumno_profesor_ibfk_2` FOREIGN KEY (`pm_id`) REFERENCES `profesor_materia` (`pm_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `contenidos`
@@ -597,8 +549,7 @@ ALTER TABLE `profesor_materia`
   ADD CONSTRAINT `profesor_materia_ibfk_1` FOREIGN KEY (`aula_id`) REFERENCES `aulas` (`aula_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `profesor_materia_ibfk_2` FOREIGN KEY (`grado_id`) REFERENCES `grados` (`grado_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `profesor_materia_ibfk_3` FOREIGN KEY (`profesor_id`) REFERENCES `profesor` (`profesor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `profesor_materia_ibfk_4` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`materia_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `profesor_materia_ibfk_5` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`periodo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `profesor_materia_ibfk_4` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`materia_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded',function(){
         e.preventDefault();
         var idalumno = document.querySelector('#idalumno').value;
         var nombre = document.querySelector('#nombre').value;
-        var nombre = document.querySelector('#edad').value;
+        var edad = document.querySelector('#edad').value;
         var direccion = document.querySelector('#direccion').value;
         var cedula = document.querySelector('#cedula').value;
         var clave = document.querySelector('#clave').value;
@@ -45,8 +45,20 @@ document.addEventListener('DOMContentLoaded',function(){
         var fecha_reg = document.querySelector('#fecha_reg').value;
         var estado = document.querySelector('#listEstado').value;
 
-        if(nombre == '' || direccion == '' || cedula == '' || telefono == '' || correo == '' || fecha_nac == '' || fecha_reg == '') {
+        if(nombre == '' || direccion == '' || cedula == '' || telefono == '' || correo == '' || fecha_nac == '' || fecha_reg == '' || edad == '') {
             swal("Atencion", "Todos los campos son necesarios", "warning");
+            return false;
+        }
+        if(edad < 1) {
+            swal("Atencion", "La edad no es valida", "warning");
+            return false;
+        }
+        if(cedula < 1) {
+            swal("Atencion", "La cedula no es valida", "warning");
+            return false;
+        }
+        if(telefono < 1) {
+            swal("Atencion", "El telefono no es valida", "warning");
             return false;
         }
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest: new ActiveXObject('Microsoft.XMLHTTP');

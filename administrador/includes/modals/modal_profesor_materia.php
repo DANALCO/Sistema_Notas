@@ -9,48 +9,55 @@
       </div>
       <div class="modal-body">
         <form id="formProfesorMateria" name="formProfesorMateria">
-        <input type="hidden" name="idprofesormateria" id="idprofesormateria" value="">
-        <div class="form-group">
+          <!-- Campo oculto para almacenar el ID de la relación profesor-materia -->
+          <input type="hidden" name="idprofesormateria" id="idprofesormateria" value="">
+          <!-- Selección del profesor -->
+          <div class="form-group">
+            <!-- Lista desplegable para seleccionar el profesor (se llenará mediante AJAX) -->
+            <!-- Esto se hace por medio del js -->
             <label for="listEstado">Seleccione el Profesor</label>
             <select class="form-control" name="listProfesor" id="listProfesor">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <!-- Selección del grado -->
+          <div class="form-group">
+            <!-- Lista desplegable para seleccionar el grado (se llenará mediante AJAX) -->
+            <!-- Esto se hace por medio del js -->
             <label for="listGrado">Seleccione el Grado</label>
             <select class="form-control" name="listGrado" id="listGrado">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <!-- Selección del aula -->
+          <div class="form-group">
+            <!-- Lista desplegable para seleccionar el aula (se llenará mediante AJAX) -->
+            <!-- Esto se hace por medio del js -->
             <label for="listEstado">Seleccione el Aula</label>
             <select class="form-control" name="listAula" id="listAula">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <!-- Selección de la materia -->
+          <div class="form-group">
+            <!-- Lista desplegable para seleccionar la materia (se llenará mediante AJAX) -->
+            <!-- Esto se hace por medio del js -->
             <label for="listEstado">Seleccione la Materia</label>
             <select class="form-control" name="listMateria" id="listMateria">
-                <!-- CONTENIDO AJAX -->
+              <!-- CONTENIDO AJAX -->
             </select>
-        </div>
-        <div class="form-group">
-            <label for="listEstado">Seleccione el Periodo</label>
-            <select class="form-control" name="listPeriodo" id="listPeriodo">
-                <!-- CONTENIDO AJAX -->
-            </select>
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="listEstado">Estado</label>
             <select class="form-control" name="listEstado" id="listEstado">
-                <option value="1">Activo</option>
-                <option value="2">Inactivo</option>
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
             </select>
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="action">Guardar</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" id="action">Guardar</button>
+          </div>
         </form>
       </div>
     </div>

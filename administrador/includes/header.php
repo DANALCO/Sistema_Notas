@@ -13,6 +13,7 @@
     <meta name="description" content="sistema escolar">
     <title>Secundaria Aftons</title>
     <meta charset="utf-8">
+    <link rel="icon" href="../images/gorro-de-graduacion.png" type="image/png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->

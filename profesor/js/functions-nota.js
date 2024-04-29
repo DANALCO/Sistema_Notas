@@ -1,4 +1,6 @@
+// Esta función se ejecuta cuando se carga el contenido del documento HTML
 document.addEventListener('DOMContentLoaded',function(){
+    // Captura del evento de envío del formulario de nota
     var formNota = document.querySelector('#formNota');
     formNota.onsubmit= function(e) {
         e.preventDefault();
@@ -38,7 +40,12 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 });
-
+// Esta función se ejecuta cuando se oculta el modal de nota
+$('#modalNota').on('hidden.bs.modal', function () {
+    // Resetear el formulario
+    $('#formNota')[0].reset();
+});
+// Función para mostrar el modal de nota
 function modalNota() {
     $('#modalNota').modal('show');
 }

@@ -1,18 +1,20 @@
 <?php
+// Verificar si se recibió el parámetro 'curso' en la URL
 if(!empty($_GET['curso'])){
-    $curso = $_GET['curso'];
+    $curso = $_GET['curso'];// Obtener el ID del curso desde la URL
 }else{
-    header("Location: ./");
+    header("Location: ./");// Redirigir a la página principal si no se proporciona el ID del curso
 }
+// Incluir el archivo de encabezado y la conexión a la base de datos
     require_once 'includes/header.php';
     require_once '../includes/conexion.php';
-
+// Obtener el ID del profesor desde la sesión
     $idprofesor = intval($_SESSION['profesor_id']);
-
+// Consulta SQL para obtener la lista de alumnos asociados al curso específico
     $sql = "SELECT * FROM alumno_profesor as ap INNER JOIN profesor_materia as pm ON ap.pm_id = pm.pm_id INNER JOIN alumnos as a ON ap.alumno_id = a.alumno_id WHERE pm.pm_id = $curso";
     $query = $pdo->prepare($sql);
     $query->execute();
-    $row = $query->rowCount();
+    $row = $query->rowCount();// Contar el número de filas obtenidas en la consulta
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -42,6 +44,7 @@ if(!empty($_GET['curso'])){
                         if($row > 0) {
                             while($data = $query->fetch()){
                                 $codAlumno = $data['alumno_id'];
+                                // Consulta SQL para obtener la última fecha de acceso del alumno
                                 $sql_acceso = "SELECT u_acceso FROM alumnos WHERE alumno_id = $codAlumno";
                                 $querry_acceso = $pdo->prepare($sql_acceso);
                                 $querry_acceso->execute();
@@ -52,6 +55,7 @@ if(!empty($_GET['curso'])){
                                     <td><?= $data['cedula']?></td>
                                     <td>
                                         <?php
+                                        // Mostrar la fecha de último acceso o indicar 'NUNCA' si nunca ha accedido
                                         if($res_acceso['u_acceso'] == null){
                                             echo '<kbd class="badge badge-danger">NUNCA</kbd>';
                                         }else{

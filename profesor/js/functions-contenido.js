@@ -1,11 +1,15 @@
+// Esta función se ejecuta cuando se carga el contenido del documento HTML
 document.addEventListener('DOMContentLoaded', function(){
+        // Captura del evento de envío del formulario de contenido
     var formContenido = document.querySelector('#formContenido');
     formContenido.onsubmit = function(e) {
-        e.preventDefault();
+        e.preventDefault();// Evita el comportamiento predeterminado de envío del formulario
+        // Obtención de valores del formulario
         var idcontenido = document.querySelector('#idcontenido').value;
         var titulo = document.querySelector('#titulo').value;
         var descripcion = document.querySelector('#descripcion').value;
         var material = document.querySelector('#file').value;
+        // Validación de campos obligatorios
         if(titulo == '' || descripcion == '') {
             swal("Atencion", "Todos los campos son necesarios", "warning");
             return false;
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         if (willCreate) {
                             $('#modalContenido').modal ('hide');
                             formContenido.reset();
-                            location.reload();
+                            location.reload();// Recargar la página
                         } 
                     });
                 } else { 
@@ -46,6 +50,7 @@ function openModalContenido() {
     document.querySelector('#formContenido').reset();
     $('#modalContenido').modal('show');
 }
+// Función para editar un contenido existente
 function editarContenido(id) {
     var idcontenido = id;
     document.querySelector('#tituloModal').innerHTML = 'Actualizar Contenido';
@@ -69,6 +74,7 @@ function editarContenido(id) {
         }
     }
 }
+   // Función para eliminar un contenido
 function eliminarContenido(id){
     var idcontenido = id;
     swal({
@@ -98,7 +104,7 @@ function eliminarContenido(id){
                           })
                         .then((willfin) => {
                             if (willfin) {
-                                location.reload();
+                                location.reload();// Recargar la página
                             } 
                         });
                     } else { 
