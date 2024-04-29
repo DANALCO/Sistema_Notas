@@ -76,10 +76,14 @@ body {
 input {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     text-align: left;
 =======
     text-align: center;
 >>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
+=======
+    text-align: center;
+>>>>>>> ebccd87b7d06dca01d7c509e93888b1f9b88a962
 }
 
 #loginUsuario, #loginProfesor {
@@ -144,9 +148,12 @@ input {
 .app-menu__label{
     padding: 0 0 0 10px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 .btn-primary{
 
 =======
 >>>>>>> 5d4fd43b4726b1ca98184c5e49ea7084f11fcb66
+=======
+>>>>>>> ebccd87b7d06dca01d7c509e93888b1f9b88a962
 }
